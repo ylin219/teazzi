@@ -1,0 +1,17 @@
+{% for d in drink %}
+<div class="roomListRoom">
+    <div>
+        <div class="roomListRoom__content">
+            <a href="{% url 'topping' d.id %}">{{d.name}}</a>
+            <p>{{d.description}}</p>
+          </div>
+        <div class="roomListRoom__meta">
+            <a href="{% url 'like_Drink' d.id %}" class="roomListRoom__joined">
+                <i class="fa-solid fa-heart"></i>
+              {{d.like}} people like it
+            </a>
+            <p class="roomListRoom__topic">{{d.section.name}}</p>
+          </div>
+    </div>
+</div>
+{% endfor %}

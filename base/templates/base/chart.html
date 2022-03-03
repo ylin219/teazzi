@@ -1,0 +1,45 @@
+<style>
+  .chart_detail {
+    padding-left: 5pt;
+    padding-right: 5pt;
+  }
+  .chart_detail h3{
+    font-size: 12pt;
+  }
+  .chart_detail p{
+    font-size: 9pt;
+    font-weight:normal
+  }
+  .price_line{
+    text-align: right;
+    padding-right: 3pt;
+  }
+
+</style>
+<div class="activities">
+    <div class="activities__header">
+      <h2>Chart</h2>
+    </div>
+    <div>
+      {% for c in chart %}
+        <div class="chart_detail">
+          <h3>{{c.drink.name}}</3> <span style="float: right;"><a href="{% url 'delete_Topping' c.id %}">-</a></span>
+          <p>Sugar: {{c.sugar}}%</p>
+          <p>Ice: {{c.ice}}%</p>
+          <p>Toppings:
+          {% for t in c.toppings.all %}
+          {{t.name}}
+          {% endfor %}
+          </p>
+          <p class ="price_line">${{c.price|floatformat:2}}</p>
+          <hr style="height:1.5px;border-width:0;color:#696d97;background-color:#696d97">
+        </div>
+      {% endfor %}
+        <p class ="price_line">Total:${{total_price|floatformat:2}}</p>
+        <a href="" style="float: right;">Check Out</a>
+
+    </div>
+  </div>
+
+
+

@@ -1,0 +1,94 @@
+{% extends 'main.html' %}
+{% block content %}
+<style>
+    /* .room__details {
+        display: grid;
+        grid-template-columns: 2fr 3fr 4fr;
+    } */
+    .room__details  h3 {
+        font-size:16pt;
+    }
+    label {
+        font-size: 13pt;
+        margin-right: 2pt;
+    }
+    input {
+        margin-right:2pt;
+    }
+    
+</style>
+
+<main class="profile-page layout layout--2">
+    <div class = "container_topping">
+        <div class ="room">
+            <div class="room__top">
+            <div class="room__topLeft">
+            <a href="{% url 'home' %}">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                <title>arrow-left</title>
+                <path
+                    d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z"
+                ></path>
+                </svg>
+            </a>
+            <h3>Add Topping</h3>
+
+            </div>
+            </div>
+
+
+            <div class="room__box scroll">
+                <form action="" method="POST">
+                {% csrf_token %}
+                <div class="room__details">
+                    <div>
+                        <br>
+                        <h3>Suger level</h3>
+                            <input type="radio" id='nosugar' name="sugar" value="0" required/>
+                            <label for="nosugar">0% sugar</label>
+                            <input type="radio" id='30sugar' name="sugar" value="30"/>
+                            <label for="30sugar">30% sugar</label>
+                            <input type="radio" id='50sugar' name="sugar" value="50"/>
+                            <label for="50sugar">50% sugar</label>
+                            <input type="radio" id='70sugar' name="sugar" value="70"/>
+                            <label for="70sugar">70% sugar</label>
+                            <input type="radio" id='100sugar' name="sugar" value="100"/>
+                            <label for="100sugar">100% sugar</label>
+                    </div>
+                    <br>
+                    <div>
+                        <h3>Temprature Level</h3>
+                            <input type="radio" id='noice' name="ice" value="0" required />
+                            <label for="noice">0% ice</label>
+                            <input type="radio" id='30ice' name="ice" value="30">
+                            <label for="30ice">30% ice</label>
+                            <input type="radio" id='70ice' name="ice" value="70">
+                            <label for="100ice">70% ice</label>
+                            <input type="radio" id='100ice' name="ice" value="100">
+                            <label for="100ice">100% ice</label>
+                            <input type="radio" id='warm' name="ice" value="warm">
+                            <label for="warm">warm</label>
+                            <input type="radio" id='hot' name="ice" value="hot">
+                            <label for="hot">hot</label>
+                    </div>
+                    <br>
+                    <div>
+                        <h3>Toppings</h3>
+                        {% for t in topping %}
+                            <input type="checkbox" id="{{t.name}}" name="topping" value="{{t.name}}"/>
+                            <label for="{{t.name}}">{{t.name}}</label>
+                        {% endfor %}
+                      </div>
+                </div>
+                <hr>
+                <!-- <p style="text-align: right;">Total: ${{drink.price}}</p> -->
+                <input name='topping_list' type="submit" value="Add to chart">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div>
+    </div>
+  </main>
+
+{% endblock content %}

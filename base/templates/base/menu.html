@@ -1,0 +1,12 @@
+<div class="topics">
+    <div class="topics__header">
+      <a href="{% url 'home' %}" style="color: #596167; font-size: large;" >Menu</a>
+    </div>
+    <ul class="topics__list">
+      {% for s in section %}
+      <li>
+        <a href="{% url 'home' %}?q={{s.name}}" class="active">{{s.name}}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
