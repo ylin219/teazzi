@@ -18,11 +18,14 @@ def home(request):
         Q(name__icontains = q) 
         )
     section = Section.objects.all()
-    chart = Chart.objects.all()
-    total_price = Chart.objects.all().aggregate(Sum('price'))['price__sum']
-    if total_price == None:
-        total_price=0
-    return render(request,'base/home.html',{'section':section,'drink':drink,'chart':chart,'total_price':total_price})
+    if request.user.is_authenticated:
+        chart = Chart.objects.filter(user=request.user)
+        total_price = chart.aggregate(Sum('price'))['price__sum']
+        if total_price == None:
+            total_price=0
+        return render(request,'base/home.html',{'section':section,'drink':drink,'chart':chart,'total_price':total_price})
+    else:
+        return render(request,'base/home.html',{'section':section,'drink':drink})
 # def items(request,pk):
 #     return render(request,'base/items.html')
 @login_required(login_url='login')
